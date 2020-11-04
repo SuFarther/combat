@@ -1,0 +1,55 @@
+PHP高级实战-打造自己MVC框架
+
+1、Laravel
+2、CodeIgniter
+3、Symfony
+4、Yii
+5、CakePHP
+
+各个框架的优缺点:
+https://baijiahao.baidu.com/s?id=1669262217140342366&wfr=spider&for=pc
+
+1、mvc概念
+  model    view    controller
+  (模型)   (视图)   （控制器）
+
+2、psr规范
+     psr1: 基础编程规范
+     psr2: 编程风格规范
+     psr3: 日志接口规范
+     psr4: 自动加载规范
+3、命名规范
+   文件名和类名相同(大驼峰原则) IndexController
+   命名空间名和文件名相同(全部小写)
+4、单一入口(简单路由)
+   index.php?m=index&a=index pathinfo index.php/index/index
+   spl_autoload_register(_autoload)
+5、框架目录结构
+    app
+       model
+          UserModel.php
+       view
+          Controller.php
+          UserController.php
+    config
+       config.php
+    vendor
+       lib
+          framework
+             src
+                Model.php
+                Page.php
+       public
+          css
+          js
+          fonts
+          editor
+       cache
+          缓存
+
+
+6、命名空间映射
+model => app/model/
+controller => app/controller/
+framework => vendor/lib/framework/src
+

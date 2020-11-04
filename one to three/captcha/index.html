@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>确认验证码</title>
+</head>
+<body>
+    <form method="post" action="form.php">
+        <p>验证码: <img id="captcha_img" border='1' src='captcha.php?r=echo rand(); ?>' style="width:100px; height:30px" />
+            <a href="#" onclick="document.getElementById('captcha_img').src='captcha.php?r='+Math.random()">换一个?</a>
+                </p>
+        <P>请输入验证码:<input type="text" name='authcode' value=''/></p>
+        <p><input type='submit' value='提交' style='padding:6px 5px;'/></p>
+    </form>
+</body>
+</html>

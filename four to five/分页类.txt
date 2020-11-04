@@ -1,0 +1,33 @@
+PHP高级实战-分页类
+
+首页  上一页  下一页  尾页
+
+
+分页类
+   核心: 得到首页、上一页、下一页、尾页的url
+   $_SERVER
+   REQUEST_URI 除了协议主机端口号以为的所有东西(得到路径和请求字符串)
+   SERVER_PORT  端口号   http:80 https: 443 ftp:21
+   SERVER_NAME 主机名
+   REQUEST_SCHEME 协议
+
+
+   parse_url
+      path:文件的路径
+      query: 请求的参数
+   parse_str
+      将query字符串变成关联数组
+   http_build_query
+      将关联数组转换为query字符串
+
+   //每页显示的个数
+   protected $number;
+   //一共多少数据
+   protected $totalCount;
+   //一共多少页
+   protected $totalPage;
+   //当前页
+   protected $page;
+   //url
+   protected $url;
+

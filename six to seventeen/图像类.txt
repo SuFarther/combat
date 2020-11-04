@@ -1,0 +1,77 @@
+PHP高级实战-图像类
+
+1、水印
+2、缩放
+
+共同的属性设置为成员属性
+路径
+是否启用随机名字
+图像类型
+
+对外公开函数
+1、水印函数
+2、缩放函数
+
+
+   //处理透明函数
+   protected  function kidOfImage($srcImg,$size,$imgInfo)
+   {
+     //传入新的尺寸,创建一个指定尺寸的图片
+     $newImg = imagecreatetruecolor($size['old_w'],$size['old_h']);
+     //定义透明色
+     $otsc = imagecolortransparent($srcImg);
+     if($otsc >=0){
+         //取得透明色
+         $transparentcolor = imagecolorsforindex($srcImg,$otsc);
+         //创建透明色
+         $newtransparentcolor = imagecolorallcate(
+            $newImg,
+            $transparentcolor['red'],
+            $transparentcolor['green'],
+            $transparentcolor['blue']
+         );
+     }else{
+        //将黑色作为透明色,因为创建图像后在第一次分配颜色时背景默认为黑色
+        $newtransparentcolor = imagecolorallocate($newImg,0,0);
+     }
+
+     //背景填充透明
+     imagefill($newImg,0,0,$newtransparentcolor);
+     imagecolortransparent($newImg,$newtransparentcolor);
+
+     imagecopyresampled($newImg,$newtransparentcolor);
+
+
+     imagecopyresampled($newImg,$srcImg,$size['x'],$size['y'],0,0
+     ,$size["new_w"],$size['new_h'],$imgInfo['width'],$imgInfo['height']);
+      return $newImg;
+   }
+
+   //计算图像最终的宽度和高度
+   /**
+   $width:最终缩放的宽度
+   $height: 最终缩放的高度
+   $imgInfo:原始图片的宽度和高度
+   */
+
+
+   protected function getNewSize($width,$height,$imgInfo){
+      $size['old_w'] = $width;
+      $size['old_h'] = $height;
+
+      $scaleWidth = $width / $imgInfo['width'];
+      $scaleHeight = $height / $imgInfo['height'];
+      $scaleFinal = min($scaleWidth,$scaleHeight);
+
+      $size['new_w'] = round($imgInfo['width'] * $scaleFinal);
+      $size['new_h'] = round($imgInfo['height'] * $scaleFinal);
+
+      if($scaleWidth < $scaleHeight){
+         $size['x'] = 0;
+         $size['y'] = round(abs($size['new_h'] - $height)/2);
+      }else{
+         $size['y'] = 0;
+         $size['x'] = round(abs($size['new_w'] - $width)/2);
+      }
+      return $size;
+   }
